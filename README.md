@@ -166,6 +166,68 @@ threshold = mean + (k * stddev)
 5. Tambahkan buffer `--pre` dan `--post`.
 6. Download section via `yt-dlp` + FFmpeg stream copy.
 
+### Kenapa memakai heatmap?
+
+Heatmap YouTube/`most replayed` adalah sinyal perilaku penonton. Titik yang sering diputar ulang biasanya berisi momen penting, lucu, mengejutkan, informatif, atau punya payoff. Karena itu heatmap dipakai sebagai sinyal awal untuk menemukan kandidat clip dari video panjang.
+
+Pipeline tidak hanya mengambil nilai tertinggi absolut karena satu spike bisa saja noise atau artefak metadata. Sistem memakai threshold statistik agar semua momen yang cukup menonjol ikut diambil.
+
+### Rumus peak detection
+
+Untuk seluruh nilai intensitas heatmap:
+
+```text
+values = [V1, V2, V3, ..., Vn]
+```
+
+Hitung rata-rata:
+
+```text
+mean = sum(values) / len(values)
+```
+
+Hitung simpangan baku populasi:
+
+```text
+stddev = sqrt(sum((value - mean)^2) / len(values))
+```
+
+Threshold:
+
+```text
+threshold = mean + (k * stddev)
+```
+
+Titik heatmap dianggap peak jika:
+
+```text
+value >= threshold
+```
+
+Makna `k`:
+
+- `k < 1.5`: lebih sensitif, clip lebih banyak, risiko false positive lebih tinggi.
+- `k = 1.5`: default seimbang.
+- `k > 1.5`: lebih konservatif, hanya spike kuat yang lolos.
+
+Jika beberapa titik lolos threshold, semua kandidat diambil dan diurutkan berdasarkan intensitas. Output diberi suffix `peakNN` agar clip dari video yang sama tidak saling overwrite.
+
+### Buffer clip
+
+Setiap peak timestamp `T` diberi konteks sebelum dan sesudah momen:
+
+```text
+start = max(0, T - pre)
+end = min(duration, T + post)
+```
+
+Default:
+
+- `pre = 10` detik
+- `post = 15` detik
+
+Buffer penting karena FFmpeg stream copy tidak frame-perfect dan pemotongan mengikuti keyframe terdekat. Tanpa buffer, konteks atau punchline bisa terpotong.
+
 ### Content pack
 
 1. Download audio full video atau pakai `--audio-file`.
