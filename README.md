@@ -425,3 +425,13 @@ Install runtime dependencies with:
 ```bash
 python3 -m pip install -r requirements.txt
 ```
+
+## Environment Configuration
+
+Copy `.env.example` to `.env` for local secrets and optional AI settings:
+
+```bash
+cp .env.example .env
+```
+
+`OPENAI_API_KEY` is optional for now. The current content-pack MVP uses offline planning unless a future OpenAI planner is enabled.
