@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local env/secrets
+.env
+.env.*
+
+# Generated media/output
+clips/*
+!clips/.gitkeep
+content_packs/*
+!content_packs/.gitkeep
+
+# Temporary downloads
+*.part
+*.ytdl
+*.tmp
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
