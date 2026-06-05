@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from content_pack.transcriber import JsonTranscriptLoader
+from content_pack.transcriber import FasterWhisperTranscriber, JsonTranscriptLoader
 
 
 class ContentPackTranscriberTests(unittest.TestCase):
@@ -15,6 +15,13 @@ class ContentPackTranscriberTests(unittest.TestCase):
         self.assertEqual(len(segments), 2)
         self.assertEqual(segments[0].text, "Halo")
         self.assertEqual(segments[1].language, "en")
+
+    def test_faster_whisper_transcriber_stores_runtime_options(self):
+        transcriber = FasterWhisperTranscriber(model_size="small", device="cpu", compute_type="int8")
+        self.assertEqual(transcriber.model_size, "small")
+        self.assertEqual(transcriber.device, "cpu")
+        self.assertEqual(transcriber.compute_type, "int8")
+
 
 if __name__ == "__main__":
     unittest.main()

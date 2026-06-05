@@ -74,6 +74,12 @@ class HeatmapPipelineTests(unittest.TestCase):
             "id,en",
             "--top-n",
             "3",
+            "--whisper-model",
+            "small",
+            "--whisper-device",
+            "cpu",
+            "--whisper-compute-type",
+            "int8",
         ])
 
         self.assertEqual(args.command, "content-pack")
@@ -81,6 +87,9 @@ class HeatmapPipelineTests(unittest.TestCase):
         self.assertEqual(args.formats, "top_n,shorts_pack")
         self.assertEqual(args.languages, "id,en")
         self.assertEqual(args.top_n, 3)
+        self.assertEqual(args.whisper_model, "small")
+        self.assertEqual(args.whisper_device, "cpu")
+        self.assertEqual(args.whisper_compute_type, "int8")
 
 
 if __name__ == "__main__":

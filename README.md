@@ -408,3 +408,20 @@ python3 heatmap_pipeline.py content-pack \
   --transcript-json "transcript_fixture.json" \
   --peaks-json "peaks_fixture.json"
 ```
+
+Whisper runtime can be tuned for cheaper CPU transcription:
+
+```bash
+python3 heatmap_pipeline.py content-pack \
+  --url "https://www.youtube.com/watch?v=VIDEO_ID" \
+  --theme "best moments" \
+  --whisper-model small \
+  --whisper-device cpu \
+  --whisper-compute-type int8
+```
+
+Install runtime dependencies with:
+
+```bash
+python3 -m pip install -r requirements.txt
+```

@@ -386,6 +386,9 @@ def add_content_pack_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--transcript-json", help="Fixture transcript JSON untuk dry run/test murah.")
     parser.add_argument("--peaks-json", help="Fixture heatmap peaks JSON untuk dry run/test murah.")
     parser.add_argument("--export-clips", action="store_true", help="Export clipNN.mp4 ke folder content pack.")
+    parser.add_argument("--whisper-model", default="medium", help="Model faster-whisper untuk transkripsi full audio.")
+    parser.add_argument("--whisper-device", default="auto", help="Device faster-whisper, misalnya auto/cpu/cuda.")
+    parser.add_argument("--whisper-compute-type", default="default", help="Compute type faster-whisper, misalnya default/int8/float16.")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -412,7 +415,11 @@ def run_content_pack_command(args: argparse.Namespace) -> int:
     from content_pack.heatmap import JsonPeakLoader
     from content_pack.transcriber import FasterWhisperTranscriber, JsonTranscriptLoader
 
-    transcriber = JsonTranscriptLoader(Path(args.transcript_json)) if args.transcript_json else FasterWhisperTranscriber()
+    transcriber = JsonTranscriptLoader(Path(args.transcript_json)) if args.transcript_json else FasterWhisperTranscriber(
+        model_size=args.whisper_model,
+        device=args.whisper_device,
+        compute_type=args.whisper_compute_type,
+    )
     heatmap_extractor = JsonPeakLoader(Path(args.peaks_json)) if args.peaks_json else None
     orchestrator = ContentPackOrchestrator(
         transcriber=transcriber,
