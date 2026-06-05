@@ -375,3 +375,36 @@ MVP notes:
 - Full audio transcription uses `faster-whisper` when `--transcript-json` is not provided.
 - Reasoning uses an offline planner first; cloud LLM integration can be added behind the planner interface.
 - Final video rendering is intentionally out of scope. The output is meant for manual editors or AI video-maker agents.
+
+### Auto Audio And Clip Export
+
+`content-pack` can now download source audio automatically when `--audio-file` is omitted:
+
+```bash
+python3 heatmap_pipeline.py content-pack \
+  --url "https://www.youtube.com/watch?v=VIDEO_ID" \
+  --theme "kelucuan si Bagus" \
+  --formats top_n,shorts_pack \
+  --languages id,en \
+  --top-n 5
+```
+
+Use `--export-clips` to also create `clips/clipNN.mp4` assets inside the content pack folder:
+
+```bash
+python3 heatmap_pipeline.py content-pack \
+  --url "https://www.youtube.com/watch?v=VIDEO_ID" \
+  --theme "best funny moments" \
+  --formats top_n \
+  --export-clips
+```
+
+For cheap offline tests, provide both fixtures:
+
+```bash
+python3 heatmap_pipeline.py content-pack \
+  --url "https://www.youtube.com/watch?v=VIDEO_ID" \
+  --audio-file "unused.m4a" \
+  --transcript-json "transcript_fixture.json" \
+  --peaks-json "peaks_fixture.json"
+```

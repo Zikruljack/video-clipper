@@ -256,6 +256,33 @@ class VideoClipper:
             },
         }
 
+    def build_range_ydl_opts(self, time_range: tuple[float, float], output_path: Path) -> dict[str, Any]:
+        if download_range_func is None:
+            require_yt_dlp()
+            raise RuntimeError("yt-dlp download_range_func tidak tersedia pada versi ini")
+
+        return {
+            "format": self.config.format_selector,
+            "merge_output_format": "mp4",
+            "outtmpl": str(output_path),
+            "download_ranges": download_range_func([], [list(time_range)]),
+            "force_keyframes_at_cuts": False,
+            "socket_timeout": self.config.socket_timeout_seconds,
+            "js_runtimes": {self.config.js_runtime: {"path": self.config.js_runtime_path}} if self.config.js_runtime_path else {self.config.js_runtime: {}},
+            "postprocessor_args": {
+                "ffmpeg": ["-c", "copy"],
+            },
+        }
+
+    def download_range_clip(self, url: str, start: float, end: float, output_path: Path) -> None:
+        if not is_youtube_url(url):
+            raise ValueError(f"URL bukan YouTube: {url}")
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        ytdlp = require_yt_dlp()
+        with ytdlp.YoutubeDL(self.build_range_ydl_opts((start, end), output_path)) as ydl:
+            ydl.download([url])
+
     def output_template_for_peak(self, peak_index: int) -> str:
         stem, dot, extension = self.config.output_template.rpartition(".")
         if not dot:
@@ -350,7 +377,7 @@ def add_clip_arguments(parser: argparse.ArgumentParser) -> None:
 
 def add_content_pack_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--url", required=True, help="YouTube URL sumber.")
-    parser.add_argument("--audio-file", required=True, help="Path audio full video untuk transkripsi.")
+    parser.add_argument("--audio-file", help="Path audio full video untuk transkripsi. Jika kosong, audio akan diunduh otomatis.")
     parser.add_argument("--theme", help="Tema konten. Jika kosong, mode discovery dapat ditambahkan nanti.")
     parser.add_argument("--formats", default="best_moments,shorts_pack")
     parser.add_argument("--languages", default="id,en")
@@ -358,6 +385,7 @@ def add_content_pack_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--output-dir", default="content_packs")
     parser.add_argument("--transcript-json", help="Fixture transcript JSON untuk dry run/test murah.")
     parser.add_argument("--peaks-json", help="Fixture heatmap peaks JSON untuk dry run/test murah.")
+    parser.add_argument("--export-clips", action="store_true", help="Export clipNN.mp4 ke folder content pack.")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -394,11 +422,12 @@ def run_content_pack_command(args: argparse.Namespace) -> int:
     )
     pack = orchestrator.generate(
         url=args.url,
-        audio_path=Path(args.audio_file),
+        audio_path=Path(args.audio_file) if args.audio_file else None,
         theme=args.theme,
         formats=comma_list(args.formats),
         languages=comma_list(args.languages),
         top_n=args.top_n,
+        export_clips=args.export_clips,
     )
     print(json.dumps(pack.to_dict(), indent=2, ensure_ascii=False))
     return 0
