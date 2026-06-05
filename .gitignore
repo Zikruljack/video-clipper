@@ -29,4 +29,6 @@ content_packs/*
 .DS_Store
 Thumbs.db
 .vscode/
+!.vscode/
+!.vscode/settings.json
 .idea/
