@@ -1,10 +1,16 @@
 {
   "files.exclude": {
     "**/__pycache__": true,
-    "**/*.pyc": true
+    "**/*.pyc": true,
+    "**/__init__.py": true,
+    "clips/**": true,
+    "content_packs/**": true
   },
   "search.exclude": {
     "**/__pycache__": true,
-    "**/*.pyc": true
+    "**/*.pyc": true,
+    "**/__init__.py": true,
+    "clips/**": true,
+    "content_packs/**": true
   }
 }
