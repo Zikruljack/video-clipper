@@ -1,6 +1,6 @@
 import unittest
-from content_pack.models import CandidateMoment, TranscriptSegment
-from content_pack.scoring import HybridScorer
+from src.content_pack.models import CandidateMoment, TranscriptSegment
+from src.content_pack.scoring import HybridScorer
 
 class ContentPackScoringTests(unittest.TestCase):
     def candidate(self, candidate_id, start, heatmap, text):

@@ -3,8 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from content_pack.models import ContentPack, TranscriptSegment
-from content_pack.srt import segments_to_srt
+from src.content_pack.models import ContentPack, TranscriptSegment
+from src.content_pack.srt import segments_to_srt
 
 
 class ContentPackExporter:

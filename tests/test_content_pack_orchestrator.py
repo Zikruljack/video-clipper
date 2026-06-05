@@ -1,10 +1,10 @@
 import tempfile
 import unittest
 from pathlib import Path
-from content_pack.llm import OfflineContentPlanner
-from content_pack.models import TranscriptSegment
-from content_pack.orchestrator import ContentPackOrchestrator
-from heatmap_pipeline import PeakResult
+from src.content_pack.llm import OfflineContentPlanner
+from src.content_pack.models import TranscriptSegment
+from src.content_pack.orchestrator import ContentPackOrchestrator
+from src.heatmap_pipeline import PeakResult
 
 class StaticTranscriber:
     def transcribe(self, audio_path: Path):

@@ -2,7 +2,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from content_pack.audio import YtDlpAudioDownloader, default_audio_path
+from src.content_pack.audio import YtDlpAudioDownloader, default_audio_path
 
 
 class FakeYtdlp:

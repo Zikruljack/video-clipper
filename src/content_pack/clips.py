@@ -4,7 +4,7 @@ from dataclasses import replace
 from pathlib import Path
 from typing import Protocol
 
-from content_pack.models import SelectedClip
+from src.content_pack.models import SelectedClip
 
 
 class RangeClipper(Protocol):

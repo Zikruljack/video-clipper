@@ -1,8 +1,8 @@
 import unittest
 from pathlib import Path
 
-from content_pack.clips import ClipAssetExporter
-from content_pack.models import SelectedClip
+from src.content_pack.clips import ClipAssetExporter
+from src.content_pack.models import SelectedClip
 
 
 class FakeClipper:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Protocol
 
-from content_pack.models import CandidateMoment, SelectedClip
+from src.content_pack.models import CandidateMoment, SelectedClip
 
 
 class ContentPlanner(Protocol):

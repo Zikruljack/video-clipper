@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from heatmap_pipeline import PeakResult
+from src.heatmap_pipeline import PeakResult
 
 
 class JsonPeakLoader:

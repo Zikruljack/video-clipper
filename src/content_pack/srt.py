@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from content_pack.models import TranscriptSegment
+from src.content_pack.models import TranscriptSegment
 
 
 def format_srt_timestamp(seconds: float) -> str:

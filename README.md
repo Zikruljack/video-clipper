@@ -435,3 +435,16 @@ cp .env.example .env
 ```
 
 `OPENAI_API_KEY` is optional for now. The current content-pack MVP uses offline planning unless a future OpenAI planner is enabled.
+
+## Project Structure
+
+```text
+src/
+  heatmap_pipeline.py      # main CLI implementation
+  content_pack/            # content-pack services and exporters
+heatmap_pipeline.py        # root CLI wrapper for backwards compatibility
+tests/                     # unittest suite
+docs/superpowers/          # design specs and implementation plans
+clips/                     # generated direct clip outputs, ignored except .gitkeep
+content_packs/             # generated content packs, ignored except .gitkeep
+```

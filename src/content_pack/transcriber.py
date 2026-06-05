@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Protocol
 
-from content_pack.models import TranscriptSegment
+from src.content_pack.models import TranscriptSegment
 
 
 class Transcriber(Protocol):

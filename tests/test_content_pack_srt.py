@@ -1,7 +1,7 @@
 import unittest
 
-from content_pack.models import TranscriptSegment
-from content_pack.srt import format_srt_timestamp, segments_to_srt
+from src.content_pack.models import TranscriptSegment
+from src.content_pack.srt import format_srt_timestamp, segments_to_srt
 
 
 class ContentPackSrtTests(unittest.TestCase):

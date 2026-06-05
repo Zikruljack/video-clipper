@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from content_pack.heatmap import JsonPeakLoader
+from src.content_pack.heatmap import JsonPeakLoader
 
 
 class ContentPackHeatmapTests(unittest.TestCase):

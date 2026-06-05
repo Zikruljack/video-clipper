@@ -1,6 +1,6 @@
 import unittest
 
-from heatmap_pipeline import HeatmapExtractor, HeatmapPoint, PeakResult, PipelineConfig, VideoClipper, build_parser, is_youtube_url
+from src.heatmap_pipeline import HeatmapExtractor, HeatmapPoint, PeakResult, PipelineConfig, VideoClipper, build_parser, is_youtube_url
 
 
 class HeatmapPipelineTests(unittest.TestCase):

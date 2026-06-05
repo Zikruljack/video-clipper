@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from content_pack.models import CandidateMoment, TranscriptSegment
-from heatmap_pipeline import PeakResult
+from src.content_pack.models import CandidateMoment, TranscriptSegment
+from src.heatmap_pipeline import PeakResult
 
 
 class CandidateBuilder:

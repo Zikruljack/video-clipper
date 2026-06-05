@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from content_pack.transcriber import FasterWhisperTranscriber, JsonTranscriptLoader
+from src.content_pack.transcriber import FasterWhisperTranscriber, JsonTranscriptLoader
 
 
 class ContentPackTranscriberTests(unittest.TestCase):

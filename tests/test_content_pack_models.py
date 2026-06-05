@@ -1,6 +1,6 @@
 import unittest
 
-from content_pack.models import CandidateMoment, TranscriptSegment
+from src.content_pack.models import CandidateMoment, TranscriptSegment
 
 
 class ContentPackModelTests(unittest.TestCase):

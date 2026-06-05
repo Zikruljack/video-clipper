@@ -2,8 +2,8 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
-from content_pack.exporter import ContentPackExporter
-from content_pack.models import CandidateMoment, ContentPack, SelectedClip, TranscriptSegment
+from src.content_pack.exporter import ContentPackExporter
+from src.content_pack.models import CandidateMoment, ContentPack, SelectedClip, TranscriptSegment
 
 class ContentPackExporterTests(unittest.TestCase):
     def test_exporter_writes_pack_json_scripts_timeline_and_transcript(self):

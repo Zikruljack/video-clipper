@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import replace
 
-from content_pack.models import CandidateMoment
+from src.content_pack.models import CandidateMoment
 
 
 class HybridScorer:

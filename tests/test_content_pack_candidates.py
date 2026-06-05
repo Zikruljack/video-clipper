@@ -1,7 +1,7 @@
 import unittest
-from content_pack.candidates import CandidateBuilder
-from content_pack.models import TranscriptSegment
-from heatmap_pipeline import PeakResult
+from src.content_pack.candidates import CandidateBuilder
+from src.content_pack.models import TranscriptSegment
+from src.heatmap_pipeline import PeakResult
 
 class ContentPackCandidateTests(unittest.TestCase):
     def test_builder_creates_candidate_with_nearby_transcript(self):

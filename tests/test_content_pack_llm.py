@@ -1,6 +1,6 @@
 import unittest
-from content_pack.llm import OfflineContentPlanner
-from content_pack.models import CandidateMoment, TranscriptSegment
+from src.content_pack.llm import OfflineContentPlanner
+from src.content_pack.models import CandidateMoment, TranscriptSegment
 
 class ContentPackLlmTests(unittest.TestCase):
     def test_offline_planner_generates_bilingual_clip_copy(self):

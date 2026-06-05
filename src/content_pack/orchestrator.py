@@ -2,15 +2,15 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from content_pack.audio import YtDlpAudioDownloader
-from content_pack.candidates import CandidateBuilder
-from content_pack.clips import ClipAssetExporter
-from content_pack.exporter import ContentPackExporter
-from content_pack.llm import ContentPlanner, OfflineContentPlanner
-from content_pack.models import ContentPack
-from content_pack.scoring import HybridScorer
-from content_pack.transcriber import Transcriber
-from heatmap_pipeline import HeatmapExtractor, PipelineConfig, VideoClipper
+from src.content_pack.audio import YtDlpAudioDownloader
+from src.content_pack.candidates import CandidateBuilder
+from src.content_pack.clips import ClipAssetExporter
+from src.content_pack.exporter import ContentPackExporter
+from src.content_pack.llm import ContentPlanner, OfflineContentPlanner
+from src.content_pack.models import ContentPack
+from src.content_pack.scoring import HybridScorer
+from src.content_pack.transcriber import Transcriber
+from src.heatmap_pipeline import HeatmapExtractor, PipelineConfig, VideoClipper
 
 
 class ContentPackOrchestrator:
